@@ -40,6 +40,9 @@ func (s System) Equals(other SystemInterface) bool {
 }
 
 func (s *System) RecMsg(msg Msg) {
+	if msg.Immediate == true {
+		s.ImmMsgQue = append(s.MsgQue, msg)
+	}
 	s.MsgQue = append(s.MsgQue, msg)
 }
 

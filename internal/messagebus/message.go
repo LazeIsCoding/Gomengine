@@ -7,10 +7,7 @@ const (
 	TEST_MESSAGE    Message = 1
 )
 
-var (
-	immediate bool
-)
-
 type Msg struct {
 	Message
+	Immediate bool
 }
