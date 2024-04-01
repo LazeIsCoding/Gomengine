@@ -25,9 +25,17 @@ func (s *AudioSystem) HandleMsg() {
 
 	} else {
 		msg := s.MsgQue.Dequeue()
-		switch msg.Message {
-		case msgb.EXAMPLE_MESSAGE:
-			fmt.Print("Handle Message from AudioSystem\n")
+		if msg != nil {
+			switch msg.Message {
+			case msgb.EXAMPLE_MESSAGE:
+				fmt.Print("Handle Message from AudioSystem\n")
+			}
 		}
+
+	}
+}
+func (s *AudioSystem) Update() {
+	for {
+		s.HandleMsg()
 	}
 }

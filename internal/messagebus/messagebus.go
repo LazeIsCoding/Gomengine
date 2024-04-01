@@ -5,22 +5,22 @@ import (
 	"fmt"
 )
 
-type messageBus struct {
+type MessageBus struct {
 	Systems map[string]SystemInterface
 }
 
-func InitNewBus() *messageBus {
-	return &messageBus{Systems: make(map[string]SystemInterface)}
+func InitNewBus() *MessageBus {
+	return &MessageBus{Systems: make(map[string]SystemInterface)}
 }
 
 // Register a System to the Message Bus
-func (mb *messageBus) RegisterSystem(name string, sys SystemInterface) {
+func (mb *MessageBus) RegisterSystem(name string, sys SystemInterface) {
 	fmt.Println("Registered System: ", name)
 	mb.Systems[name] = sys
 }
 
 // Broadcast a message to all registered Systems
-func (m *messageBus) BroadCast(msg Msg) {
+func (m *MessageBus) BroadCast(msg Msg) {
 	fmt.Println("Broadcast of Message: ", Message(msg.Message))
 	for _, system := range m.Systems {
 		system.RecMsg(msg)
@@ -45,6 +45,7 @@ func (s System) Equals(other SystemInterface) bool {
 }
 
 func (s *System) RecMsg(msg Msg) {
+	fmt.Println("Message received: ", msg.Message, "from: ", s.Name)
 	if msg.Immediate == true {
 		s.ImmMsgQue.Enqueue(msg)
 	} else {

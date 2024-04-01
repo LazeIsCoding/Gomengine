@@ -22,12 +22,20 @@ func NewGuiSystem() *GuiSystem {
 
 func (s *GuiSystem) HandleMsg() {
 	if !s.ImmMsgQue.IsEmpty() {
-
+		//TODO implement behaviour on empty immqueue
 	} else {
 		msg := s.MsgQue.Dequeue()
-		switch msg.Message {
-		case msgb.EXAMPLE_MESSAGE:
-			fmt.Print("Handle Message from GuiSystem\n")
+		if msg != nil {
+			switch msg.Message {
+			case msgb.EXAMPLE_MESSAGE:
+				fmt.Print("Handle Message from GuiSystem\n")
+			}
 		}
+	}
+}
+
+func (s *GuiSystem) Update() {
+	for {
+		s.HandleMsg()
 	}
 }

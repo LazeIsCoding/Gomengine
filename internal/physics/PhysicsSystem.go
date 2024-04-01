@@ -25,9 +25,16 @@ func (s *PhysicsSystem) HandleMsg() {
 
 	} else {
 		msg := s.MsgQue.Dequeue()
-		switch msg.Message {
-		case msgb.EXAMPLE_MESSAGE:
-			fmt.Print("Handle Message from PhysicsSystem\n")
+		if msg != nil {
+			switch msg.Message {
+			case msgb.EXAMPLE_MESSAGE:
+				fmt.Print("Handle Message from PhysicsSystem\n")
+			}
 		}
+	}
+}
+func (s *PhysicsSystem) Update() {
+	for {
+		s.HandleMsg()
 	}
 }
