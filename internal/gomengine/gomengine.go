@@ -56,6 +56,7 @@ func SendMessage() {
 			fmt.Println("Error")
 			continue
 		}
+
 		msg := msgb.Msg{
 			Message:   msgb.Message(num),
 			Immediate: false,

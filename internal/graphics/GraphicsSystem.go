@@ -3,7 +3,6 @@ package graphics
 import (
 	msgb "Gomengine/internal/messagebus"
 	"Gomengine/pkg/datastructures"
-
 	"fmt"
 )
 
@@ -31,10 +30,7 @@ func (s *GraphicsSystem) HandleMsg() {
 				fmt.Print("Handle Message from GraphicSystem\n")
 				break
 			case msgb.CREATE_WINDOW:
-				windowData := msg.Data.(msgb.WindowData)
-				width := windowData.Width
-				height := windowData.Height
-				fmt.Println("Graphics should open a window with Height:", height, " Width:", width)
+				HandleOpenGLMessage(*msg)
 				break
 			}
 		}
