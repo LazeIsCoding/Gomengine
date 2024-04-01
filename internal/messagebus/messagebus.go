@@ -1,6 +1,9 @@
 package messagebus
 
-import "fmt"
+import (
+	"Gomengine/pkg/datastructures"
+	"fmt"
+)
 
 type messageBus struct {
 	Systems map[string]SystemInterface
@@ -12,11 +15,13 @@ func InitNewBus() *messageBus {
 
 // Register a System to the Message Bus
 func (mb *messageBus) RegisterSystem(name string, sys SystemInterface) {
+	fmt.Println("Registered System: ", name)
 	mb.Systems[name] = sys
 }
 
 // Broadcast a message to all registered Systems
 func (m *messageBus) BroadCast(msg Msg) {
+	fmt.Println("Broadcast of Message: ", Message(msg.Message))
 	for _, system := range m.Systems {
 		system.RecMsg(msg)
 	}
@@ -30,26 +35,25 @@ type SystemInterface interface {
 }
 
 type System struct {
-	name      string
-	MsgQue    []Msg
-	ImmMsgQue []Msg
+	Name      string
+	MsgQue    datastructures.Queue[Msg]
+	ImmMsgQue datastructures.Queue[Msg]
 }
 
 func (s System) Equals(other SystemInterface) bool {
-	return s.name == other.(*System).name
+	return s.Name == other.(*System).Name
 }
 
 func (s *System) RecMsg(msg Msg) {
 	if msg.Immediate == true {
-		s.ImmMsgQue = append(s.MsgQue, msg)
+		s.ImmMsgQue.Enqueue(msg)
+	} else {
+		s.MsgQue.Enqueue(msg)
 	}
-	s.MsgQue = append(s.MsgQue, msg)
 }
 
 func (s *System) ShowMsgs() {
-	for i, msg := range s.MsgQue {
-		fmt.Printf("Message: %d, %d", i, msg.Message)
-	}
+	s.MsgQue.PrintQueue()
 }
 
 func (s *System) HandleMsg() {

@@ -15,15 +15,15 @@ import (
 func main() {
 
 	var msgBus = messagebus.InitNewBus()
-	var graphSys = &graphics.GraphicsSystem{}
-	var audSys = &audio.AudioSystem{}
-	var guiSys = &gui.GuiSystem{}
-	var phySys = &physics.PhysicsSystem{}
+	var graphSys = graphics.NewGraphicsSystem()
+	var audSys = audio.NewAudioSystem()
+	var guiSys = gui.NewGuiSystem()
+	var phySys = physics.NewPhysicsSystem()
 
-	msgBus.RegisterSystem("Graphics", graphSys)
-	msgBus.RegisterSystem("Audio", audSys)
-	msgBus.RegisterSystem("Gui", guiSys)
-	msgBus.RegisterSystem("Physics", phySys)
+	msgBus.RegisterSystem(graphSys.Name, graphSys)
+	msgBus.RegisterSystem(audSys.Name, audSys)
+	msgBus.RegisterSystem(guiSys.Name, guiSys)
+	msgBus.RegisterSystem(phySys.Name, phySys)
 	scanner := bufio.NewScanner(os.Stdin)
 	for {
 		scanner.Scan()
@@ -48,7 +48,9 @@ func main() {
 		for _, system := range msgBus.Systems {
 			system.HandleMsg()
 		}
+
 	}
 
 	fmt.Print("finished")
+
 }
