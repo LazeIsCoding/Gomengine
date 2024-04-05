@@ -67,11 +67,11 @@ func SendMessage() {
 
 }
 
-func CreateWindow(width, height int) {
+func CreateWindow(width, height int, name string) {
 	msg := msgb.Msg{
 		Message:   msgb.CREATE_WINDOW,
 		Immediate: false,
-		Data:      msgb.WindowData{Width: width, Height: height},
+		Data:      msgb.WindowData{Width: width, Height: height, Name: name},
 	}
 	gomen.MsgbBus.BroadCast(msg)
 }

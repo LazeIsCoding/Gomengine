@@ -1,0 +1,27 @@
+
+First you have to prepare a buffer
+Most likely given to OpenGL with glBufferData()
+
+After initializing buffers, request of geometric primitives be rendered by
+glDrawArrays()
+
+Drawing := Transferring vertex data to OpenGL Server
+Vertex:= Bundle of data values being processed together
+Mostly positional data
+Other data: Color determination
+
+Vertex Shading:
+Vertex Shader for each drawing command
+Sometimes pass-through shader
+Passing to a complex Shader with transformation matrices
+Lighting computations for vertex color
+
+Tessellation Shading:
+patchs to describe shape
+...
+
+
+
+OpenGL Initialization
+
+glGenVertexArrays() -> Allocate some number of vertex array object names

@@ -11,6 +11,7 @@ const (
 type WindowData struct {
 	Width  int
 	Height int
+	Name   string
 }
 
 type Msg struct {

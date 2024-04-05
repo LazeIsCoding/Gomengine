@@ -12,7 +12,7 @@ func main() {
 
 func init() {
 	gomengine.InitGame()
-	gomengine.CreateWindow(200, 500)
+	gomengine.CreateWindow(1000, 500, "FirstWindow")
 }
 
 func update() {

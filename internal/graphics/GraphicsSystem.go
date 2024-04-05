@@ -11,6 +11,7 @@ type GraphicsSystem struct {
 }
 
 func NewGraphicsSystem() *GraphicsSystem {
+
 	return &GraphicsSystem{
 		System: msgb.System{
 			Name:      "Graphics",
@@ -30,7 +31,7 @@ func (s *GraphicsSystem) HandleMsg() {
 				fmt.Print("Handle Message from GraphicSystem\n")
 				break
 			case msgb.CREATE_WINDOW:
-				HandleOpenGLMessage(*msg)
+				go HandleOpenGLMessage(*msg)
 				break
 			}
 		}
